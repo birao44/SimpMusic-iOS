@@ -191,6 +191,23 @@ if [ "$MODE" = device ]; then
 
 else
 
+    lipo -verify_arch arm64 "$APP/SimpMusic"
+
+    xcrun vtool -show-build "$APP/SimpMusic" |
+      tee "$ROOT/out/simulator-platform.txt"
+
+    grep -q IOSSIMULATOR "$ROOT/out/simulator-platform.txt"
+
+    SIMZIP="$ROOT/out/SimpMusic-Simulator-arm64.zip"
+
+    ditto -c -k --keepParent "$APP" "$SIMZIP"
+
+    unzip -tq "$SIMZIP"
+
+    shasum -a 256 "$SIMZIP" > "$SIMZIP.sha256"
+
+    echo "SIMULATOR_PACKAGE_VALIDATED"
+
     xcrun simctl list devices available -j > "$ROOT/out/simulators.json"
 
     read -r UDID STATE < <(

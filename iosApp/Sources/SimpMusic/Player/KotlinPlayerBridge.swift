@@ -70,11 +70,23 @@ final class KotlinPlayerBridge: NSObject, DomainNativePlayerEngine, Sendable {
 /// The Kotlin object is not Sendable as far as Swift can tell, but it is only ever called from
 /// the main thread (the engine's rule) and Kotlin/Native objects may be used from any thread,
 /// so carrying the reference across is safe.
+private final class KotlinListenerReference: @unchecked Sendable {
+    let value: any DomainNativePlayerEngineListener
+
+    init(_ value: any DomainNativePlayerEngineListener) {
+        self.value = value
+    }
+}
+
 private final class KotlinListenerAdapter: PlayerEngineListener {
-    private nonisolated(unsafe) let target: any DomainNativePlayerEngineListener
+    private nonisolated let reference: KotlinListenerReference
+
+    private var target: any DomainNativePlayerEngineListener {
+        reference.value
+    }
 
     nonisolated init(_ target: any DomainNativePlayerEngineListener) {
-        self.target = target
+        self.reference = KotlinListenerReference(target)
     }
 
     func onReady(handle: Int32, durationMs: Int64) { target.onReady(handle: handle, durationMs: durationMs) }
