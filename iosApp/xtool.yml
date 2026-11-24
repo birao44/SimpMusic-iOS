@@ -1,0 +1,5 @@
+version: 1
+bundleID: io.github.siddh68.simpmusic
+product: SimpMusic
+infoPath: Info.plist
+iconPath: Resources/AppIcon.png

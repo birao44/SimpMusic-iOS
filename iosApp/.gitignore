@@ -1,0 +1,8 @@
+Frameworks/
+.build/
+xtool/
+.swiftpm/
+.bsp/
+*.xcodeproj/
+sim/build/
+sim/Generated/

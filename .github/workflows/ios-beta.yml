@@ -1,0 +1,49 @@
+name: SimpMusic iOS Beta
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: simpmusic-beta-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: device
+            runner: macos-15-intel
+          - mode: simulator
+            runner: macos-15
+
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 150
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Build and validate
+        shell: bash
+        env:
+          BUILD_MODE: ${{ matrix.mode }}
+        run: |
+          set -o pipefail
+          mkdir -p out
+          bash ci-beta/build.sh "$BUILD_MODE" 2>&1 | tee out/build.log
+
+      - name: Collect evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: simpmusic-${{ matrix.mode }}-${{ github.run_id }}
+          path: out/
+          retention-days: 7
+          if-no-files-found: error

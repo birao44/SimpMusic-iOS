@@ -1,0 +1,46 @@
+# xcodegen project used ONLY by the CI simulator smoke test
+# (.github/workflows/ios-framework.yml, job `simulator`). The real device build is the
+# xtool package in iosApp/. Same Swift sources, unsigned simulator build.
+#
+# CI unpacks the framework into iosApp/Frameworks/ before running `xcodegen generate` here.
+name: SimpMusicSim
+options:
+  bundleIdPrefix: io.github.siddh68
+  deploymentTarget:
+    iOS: "18.0"
+targets:
+  SimpMusic:
+    type: application
+    platform: iOS
+    sources:
+      - path: ../Sources/SimpMusic
+    dependencies:
+      - framework: ../Frameworks/ComposeApp.xcframework
+        embed: true
+        codeSign: true
+    info:
+      path: Generated/Info.plist
+      properties:
+        CFBundleDisplayName: SimpMusic
+        CADisableMinimumFrameDurationOnPhone: true
+        UILaunchScreen: {}
+        UIBackgroundModes: [audio]
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: SceneDelegate
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.siddh68.simpmusic
+        PRODUCT_NAME: SimpMusic
+        SWIFT_VERSION: "6.0"
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: ""
+        ENABLE_USER_SCRIPT_SANDBOXING: NO

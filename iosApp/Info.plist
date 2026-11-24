@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Fragment merged by xtool into the generated Info.plist (xtool supplies bundle id,
+  executable, versions, MinimumOSVersion, device family, ...).
+-->
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>SimpMusic</string>
+
+	<!-- UIKit scene lifecycle (required by SDKs after iOS 26). -->
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>SimpMusic uses the local network to find and stream to devices such as speakers and TVs.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>SimpMusic saves images, such as album art or shared lyrics cards, to your photo library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>SimpMusic lets you pick an image from your photo library, for example as a playlist cover.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>SimpMusic uses the microphone only when you use a feature that needs it, such as voice search.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>SimpMusic uses the camera to scan login QR codes.</string>
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>io.github.siddh68.simpmusic</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>simpmusic</string>
+			</array>
+		</dict>
+	</array>
+
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+
+	<key>UILaunchScreen</key>
+	<dict/>
+
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+</dict>
+</plist>
