@@ -193,7 +193,9 @@ if [ "$MODE" = device ]; then
 
 else
 
-    lipo -verify_arch arm64 "$APP/SimpMusic"
+    test "$(lipo -archs "$APP/SimpMusic")" = arm64
+
+    test "$(lipo -archs "$APP/Frameworks/ComposeApp.framework/ComposeApp")" = arm64
 
     xcrun vtool -show-build "$APP/SimpMusic" |
       tee "$ROOT/out/simulator-platform.txt"
