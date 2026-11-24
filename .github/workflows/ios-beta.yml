@@ -16,6 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - mode: device
+            runner: macos-15-intel
           - mode: simulator
             runner: macos-15
 

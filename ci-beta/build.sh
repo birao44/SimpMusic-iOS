@@ -130,6 +130,8 @@ EOF
 xcodegen generate --spec project.yml
 
 BUILD_ARGS=(
+    ARCHS=arm64
+    ONLY_ACTIVE_ARCH=NO
     -project SimpMusicBeta.xcodeproj
     -scheme SimpMusic
     -configuration "$CONFIG"
